@@ -1,116 +1,38 @@
-import "./App.css";
-import {
-  getCoreRowModel,
-  flexRender,
-  useReactTable,
-} from "@tanstack/react-table";
-import React, { useState } from "react";
+import "./App.css"
+import { useEffect, useState } from "react"
 
-import { DividendGetter } from "./modules/dividends/application/dividend-getter";
-import { CompanyDividend } from "@modules/dividends/domain/company-dividend";
-import { LocalFileEtoroDividendRepository } from "@modules/dividends/infrastructure/local-file-etoro-dividend-repository";
+import { DividendGetter } from "./modules/dividends/application/dividend-getter"
+import { CompanyDividend } from "@modules/dividends/domain/company-dividend"
+import { LocalFileEtoroDividendRepository } from "@modules/dividends/infrastructure/local-file-etoro-dividend-repository"
+import { DividendsTable } from "@sections/dividends/components/dividends-table/dividends-table"
+import { YearTabs } from "@sections/dividends/components/years-tabs/year-tabs"
 
+const YEARS = [2023, 2024]
 function App() {
-  const [data, setData] = useState<CompanyDividend[]>([]);
-  const columns = React.useMemo(
-    () => [
-      {
-        accessorKey: "companyName",
-        header: "Company Name",
-      },
-      {
-        accessorKey: "netDividendUSD",
-        header: "Net Dividend (USD)",
-        cell: ({ getValue }) => `$${getValue<number>().toFixed(2)}`,
-      },
-      {
-        accessorKey: "netDividendEUR",
-        header: "Net Dividend (EUR)",
-        cell: ({ getValue }) => `€${getValue<number>().toFixed(2)}`,
-      },
-      {
-        accessorKey: "withholdingTaxRate",
-        header: "Withholding Tax Rate",
-      },
-      {
-        accessorKey: "withholdingTaxAmountUSD",
-        header: "Withholding Tax (USD)",
-        cell: ({ getValue }) => `$${getValue<number>().toFixed(2)}`,
-      },
-      {
-        accessorKey: "withholdingTaxAmountEUR",
-        header: "Withholding Tax (EUR)",
-        cell: ({ getValue }) => `€${getValue<number>().toFixed(2)}`,
-      },
-    ],
-    []
-  );
+  const [dividends, setDividends] = useState<CompanyDividend[]>([])
+  const [selectedYear, setSelectedYear] = useState(YEARS[0])
 
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-  });
+  useEffect(() => {
+    readEToro(selectedYear)
+  }, [selectedYear])
 
   return (
     <>
       <h1>Dividends</h1>
-      <div className="card">
-        <button onClick={() => readEToro()}>Read</button>
-      </div>
-      <table>
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-        <tfoot>
-          {table.getFooterGroups().map((footerGroup) => (
-            <tr key={footerGroup.id}>
-              {footerGroup.headers.map((header) => (
-                <th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.footer,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </tfoot>
-      </table>
+      <YearTabs
+        years={YEARS}
+        selectedYear={selectedYear}
+        onClick={(year) => setSelectedYear(year)}
+      />
+      <DividendsTable dividends={dividends} />
     </>
-  );
+  )
 
-  async function readEToro() {
-    const getter = new DividendGetter(new LocalFileEtoroDividendRepository());
-    const dividends = await getter.run(2023);
-    setData(dividends);
+  async function readEToro(year: number) {
+    const getter = new DividendGetter(new LocalFileEtoroDividendRepository())
+    const dividends = await getter.run(year)
+    setDividends(dividends)
   }
 }
 
-export default App;
+export default App
