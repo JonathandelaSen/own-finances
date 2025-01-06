@@ -65,7 +65,7 @@ export const DividendsTable: FC<Props> = (params: Props) => {
                     <div
                       className={
                         header.column.getCanSort()
-                          ? "cursor-pointer select-none"
+                          ? `${styles.sortableHeader}`
                           : ""
                       }
                       onClick={header.column.getToggleSortingHandler()}

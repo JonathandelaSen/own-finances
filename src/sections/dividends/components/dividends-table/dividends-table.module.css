@@ -15,3 +15,22 @@
 .oddRow {
   background-color: #2d2d38;
 }
+
+.sortableHeader {
+  cursor: pointer;
+  user-select: none;
+}
+
+table {
+  border: 1px solid #ffffff13;
+  border-radius: 5px;
+}
+
+thead {
+  background-color: #2d2d38;
+}
+
+thead tr div {
+  padding: 16px;
+  font-weight: 700;
+}

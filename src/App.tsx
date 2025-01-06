@@ -14,6 +14,12 @@ import { DividendsStats } from "@modules/dividends/domain/dividends-stats"
 const YEARS = [2023, 2024]
 function App() {
   const [dividends, setDividends] = useState<CompanyDividend[]>([])
+  const [selectedYeaStats, setSelectedYearStats] = useState<DividendsStats>({
+    netDividendEUR: 0,
+    netDividendUSD: 0,
+    withholdingTaxAmountEUR: 0,
+    withholdingTaxAmountUSD: 0,
+  })
   const [allYearStats, setAllYearStats] = useState<DividendsStats>({
     netDividendEUR: 0,
     netDividendUSD: 0,
@@ -33,7 +39,7 @@ function App() {
   return (
     <>
       <h1>Dividends</h1>
-      <div className={styles.infoPanelContainer}>
+      <div className={styles.allYearsInfoPanelContainer}>
         <InfoPanel
           title="Net dividend"
           info={`€${allYearStats.netDividendEUR.toFixed(
@@ -54,13 +60,33 @@ function App() {
           onClick={(year) => setSelectedYear(year)}
         />
       </div>
+      <div className={styles.selectedYearInfoPanelContainer}>
+        <InfoPanel
+          title="Net dividend"
+          info={`€${selectedYeaStats.netDividendEUR.toFixed(
+            2
+          )} - $${selectedYeaStats.netDividendUSD.toFixed(2)}`}
+        />
+        <InfoPanel
+          title="Withholding Tax"
+          info={`€${selectedYeaStats.withholdingTaxAmountEUR.toFixed(
+            2
+          )} - $${selectedYeaStats.withholdingTaxAmountUSD.toFixed(2)}`}
+        />
+      </div>
       <DividendsTable dividends={dividends} />
     </>
   )
 
   async function readEToro(year: number) {
-    const getter = new DividendsGetter(new LocalFileEtoroDividendRepository())
-    const dividends = await getter.run([year])
+    const dividends = await new DividendsGetter(
+      new LocalFileEtoroDividendRepository()
+    ).run([year])
+    const selectedYeaStats = await new DividendsStatsGetter(
+      new LocalFileEtoroDividendRepository()
+    ).run([year])
+
+    setSelectedYearStats(selectedYeaStats)
     setDividends(dividends)
   }
 
