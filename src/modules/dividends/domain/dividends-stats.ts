@@ -1,10 +1,6 @@
-interface CompanyDividend {
-  companyName: string
+export interface DividendsStats {
   netDividendUSD: number
   netDividendEUR: number
-  withholdingTaxRate: string
   withholdingTaxAmountUSD: number
   withholdingTaxAmountEUR: number
 }
-
-export type { CompanyDividend }
