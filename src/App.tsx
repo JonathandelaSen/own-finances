@@ -60,7 +60,7 @@ function App() {
 
   async function readEToro(year: number) {
     const getter = new DividendsGetter(new LocalFileEtoroDividendRepository())
-    const dividends = await getter.run(year)
+    const dividends = await getter.run([year])
     setDividends(dividends)
   }
 

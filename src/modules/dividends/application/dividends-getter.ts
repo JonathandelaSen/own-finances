@@ -4,7 +4,11 @@ import { CompanyDividend } from "@modules/dividends/domain/company-dividend"
 export class DividendsGetter {
   constructor(private readonly dividendRepository: DividendRepository) {}
 
-  async run(year: number): Promise<CompanyDividend[]> {
-    return await this.dividendRepository.getByYear(year)
+  async run(years: number[]): Promise<CompanyDividend[]> {
+    return (
+      await Promise.all(
+        years.map((year) => this.dividendRepository.getByYear(year))
+      )
+    ).flat()
   }
 }
