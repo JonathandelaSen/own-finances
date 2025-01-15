@@ -6,13 +6,15 @@ enum TransactionType {
   GANANCIAS_PERDIDAS_OPERACION = "Ganancias/pérdidas de la operación",
   DEPOSITO = "Depósito",
   PAGO_INTERESES = "Pago de intereses",
+  AJUSTE = "Ajuste",
+  COMISION = "Comisión",
 }
-interface EToroPosition {
+interface EToroAccountActivity {
   date: string
   type: TransactionType
   details: string
   amount: number
-  units: string | number // Depending on the format of "Unidades"
+  units: number
   realizedCapitalChange: number
   realizedCapital: number
   balance: number
@@ -21,12 +23,12 @@ interface EToroPosition {
   nonWithdrawableAmount: number
 }
 
-interface EtoroPositionRaw {
+interface EToroAccountActivityRaw {
   Fecha: string
   Tipo: string
   Detalles: string
   Importe: number
-  Unidades: string | number // Matches "Unidades" format
+  Unidades: string
   "Cambio de capital realizado": number
   "Capital realizado": number
   Saldo: number
@@ -35,17 +37,21 @@ interface EtoroPositionRaw {
   "Importe no retirable": number
 }
 
-function fromEtoroPositionRaw(raw: EtoroPositionRaw[]): EToroPosition[] {
-  return raw.map((item) => fromEtoroPositionRawItem(item))
+function fromEToroAccountActivityRaw(
+  raw: EToroAccountActivityRaw[]
+): EToroAccountActivity[] {
+  return raw.map((item) => fromEToroAccountActivityRawItem(item))
 }
 
-function fromEtoroPositionRawItem(raw: EtoroPositionRaw): EToroPosition {
+function fromEToroAccountActivityRawItem(
+  raw: EToroAccountActivityRaw
+): EToroAccountActivity {
   return {
     date: raw["Fecha"],
     type: convertToTransactionType(raw["Tipo"]),
     details: raw["Detalles"],
     amount: raw["Importe"],
-    units: raw["Unidades"],
+    units: raw["Unidades"] === "-" ? -999 : parseFloat(raw["Unidades"]),
     realizedCapitalChange: raw["Cambio de capital realizado"],
     realizedCapital: raw["Capital realizado"],
     balance: raw["Saldo"],
@@ -61,5 +67,5 @@ function convertToTransactionType(type: string): TransactionType {
   }
   throw new Error(`Invalid TransactionType: ${type}`)
 }
-export { fromEtoroPositionRaw }
-export type { EToroPosition, EtoroPositionRaw }
+export { fromEToroAccountActivityRaw, TransactionType }
+export type { EToroAccountActivity, EToroAccountActivityRaw }

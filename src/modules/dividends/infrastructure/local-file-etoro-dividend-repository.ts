@@ -1,7 +1,7 @@
 import {
   EToroDividend,
-  EtoroRaw,
-  fromEtoroRaw,
+  EToroRaw,
+  fromEToroRaw,
 } from "@modules/dividends/domain/e-toro-dividend"
 import { CompanyDividend } from "@modules/dividends/domain/company-dividend"
 import { DividendRepository } from "@modules/dividends/domain/dividend-repository"
@@ -20,8 +20,8 @@ export class LocalFileEtoroDividendRepository implements DividendRepository {
 
   private getDividendsFromEtoro(file: XLSX.WorkBook): EToroDividend[] {
     const worksheet = file.Sheets["Dividendos"]
-    const etoroJsonData = XLSX.utils.sheet_to_json(worksheet) as EtoroRaw[]
-    return fromEtoroRaw(etoroJsonData)
+    const etoroJsonData = XLSX.utils.sheet_to_json(worksheet) as EToroRaw[]
+    return fromEToroRaw(etoroJsonData)
   }
 
   private getAggregatedCompanyDividends(
@@ -56,7 +56,7 @@ export class LocalFileEtoroDividendRepository implements DividendRepository {
   }
 
   private async getFile(year: number): Promise<XLSX.WorkBook> {
-    const response = await fetch(`/etoro-${year}.xlsx`)
+    const response = await fetch(`eToro/etoro-${year}.xlsx`)
     const blob = await response.blob()
     const reader = new FileReader()
     return new Promise((resolve) => {

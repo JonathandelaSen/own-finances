@@ -10,10 +10,13 @@ import { InfoPanel } from "@sections/shared/components/info-panel"
 import styles from "./dividends.module.css"
 import { DividendsStatsGetter } from "@modules/dividends/application/dividends-stats-getter"
 import { DividendsStats } from "@modules/dividends/domain/dividends-stats"
+import { PositionsGetter } from "@modules/positions/application/positions-getter"
+import { LocalFileEtoroPositionRepository } from "@modules/positions/infrastructure/local-file-etoro-position-repository"
 
 const ALL_YEARS_KEY = 9999
 const YEARS = [2023, 2024]
 const YEARS_TABS = [...YEARS, ALL_YEARS_KEY]
+
 function App() {
   const [dividends, setDividends] = useState<CompanyDividend[]>([])
   const [selectedYeaStats, setSelectedYearStats] = useState<DividendsStats>({
@@ -31,11 +34,12 @@ function App() {
   const [selectedYear, setSelectedYear] = useState(YEARS[0])
 
   useEffect(() => {
-    readEToro(selectedYear)
+    readEToroDividends(selectedYear)
   }, [selectedYear])
 
   useEffect(() => {
-    readAllYearStats()
+    readAllYearDividendStats()
+    readEtoroPositions()
   }, [])
 
   return (
@@ -80,7 +84,7 @@ function App() {
     </>
   )
 
-  async function readEToro(year: number) {
+  async function readEToroDividends(year: number) {
     const dividends = await new DividendsGetter(
       new LocalFileEtoroDividendRepository()
     ).run(year === ALL_YEARS_KEY ? YEARS : [year])
@@ -92,11 +96,20 @@ function App() {
     setDividends(dividends)
   }
 
-  async function readAllYearStats() {
+  async function readAllYearDividendStats() {
     const allYearStats = await new DividendsStatsGetter(
       new LocalFileEtoroDividendRepository()
     ).run(YEARS)
     setAllYearStats(allYearStats)
+  }
+
+  async function readEtoroPositions() {
+    const positions = await new PositionsGetter(
+      new LocalFileEtoroPositionRepository(YEARS)
+    ).run()
+    console.log("----------------POSITIONS---------------------------------")
+    console.log(positions)
+    console.log("----------------POSITIONS  /END -----------------")
   }
 }
 

@@ -3,7 +3,7 @@ interface Position {
   ticket: string
   units: number
   totalPayedUsd: number
-  averagePrice: number
+  averagePriceUsd: number
   weightPercentage: number | undefined
   //TODO: totalDividend: number
 }

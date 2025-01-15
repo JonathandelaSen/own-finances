@@ -10,7 +10,7 @@ interface EToroDividend {
   type: string
 }
 
-interface EtoroRaw {
+interface EToroRaw {
   "Fecha de pago": string
   "Nombre del instrumento": string
   "Dividendo neto recibido (USD)": number
@@ -22,11 +22,11 @@ interface EtoroRaw {
   Tipo: string
 }
 
-function fromEtoroRaw(raw: EtoroRaw[]): EToroDividend[] {
-  return raw.map((item) => fromEtoroRawItem(item))
+function fromEToroRaw(raw: EToroRaw[]): EToroDividend[] {
+  return raw.map((item) => fromEToroRawItem(item))
 }
 
-function fromEtoroRawItem(raw: EtoroRaw): EToroDividend {
+function fromEToroRawItem(raw: EToroRaw): EToroDividend {
   return {
     paymentDate: raw["Fecha de pago"],
     companyName: raw["Nombre del instrumento"],
@@ -40,5 +40,5 @@ function fromEtoroRawItem(raw: EtoroRaw): EToroDividend {
   }
 }
 
-export { fromEtoroRaw }
-export type { EToroDividend, EtoroRaw }
+export { fromEToroRaw }
+export type { EToroDividend, EToroRaw }
