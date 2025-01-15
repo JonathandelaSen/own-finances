@@ -11,7 +11,9 @@ import styles from "./dividends.module.css"
 import { DividendsStatsGetter } from "@modules/dividends/application/dividends-stats-getter"
 import { DividendsStats } from "@modules/dividends/domain/dividends-stats"
 
+const ALL_YEARS_KEY = 9999
 const YEARS = [2023, 2024]
+const YEARS_TABS = [...YEARS, ALL_YEARS_KEY]
 function App() {
   const [dividends, setDividends] = useState<CompanyDividend[]>([])
   const [selectedYeaStats, setSelectedYearStats] = useState<DividendsStats>({
@@ -55,7 +57,7 @@ function App() {
       </div>
       <div className={styles.tabsContainer}>
         <YearTabs
-          years={YEARS}
+          years={YEARS_TABS}
           selectedYear={selectedYear}
           onClick={(year) => setSelectedYear(year)}
         />
@@ -81,10 +83,10 @@ function App() {
   async function readEToro(year: number) {
     const dividends = await new DividendsGetter(
       new LocalFileEtoroDividendRepository()
-    ).run([year])
+    ).run(year === ALL_YEARS_KEY ? YEARS : [year])
     const selectedYeaStats = await new DividendsStatsGetter(
       new LocalFileEtoroDividendRepository()
-    ).run([year])
+    ).run(year === ALL_YEARS_KEY ? YEARS : [year])
 
     setSelectedYearStats(selectedYeaStats)
     setDividends(dividends)

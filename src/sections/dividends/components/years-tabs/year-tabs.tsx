@@ -16,7 +16,7 @@ export const YearTabs: FC<Props> = (params: Props) => {
           key={year}
           onClick={() => params.onClick(year)}
         >
-          {year}
+          {year === 9999 ? "All" : year}
         </button>
       ))}
     </div>

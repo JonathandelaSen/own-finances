@@ -5,10 +5,6 @@ export class DividendsGetter {
   constructor(private readonly dividendRepository: DividendRepository) {}
 
   async run(years: number[]): Promise<CompanyDividend[]> {
-    return (
-      await Promise.all(
-        years.map((year) => this.dividendRepository.getByYear(year))
-      )
-    ).flat()
+    return await this.dividendRepository.getByYears(years)
   }
 }

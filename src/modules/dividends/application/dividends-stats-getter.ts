@@ -5,11 +5,7 @@ export class DividendsStatsGetter {
   constructor(private readonly dividendRepository: DividendRepository) {}
 
   async run(years: number[]): Promise<DividendsStats> {
-    const dividends = (
-      await Promise.all(
-        years.map((year) => this.dividendRepository.getByYear(year))
-      )
-    ).flat()
+    const dividends = await this.dividendRepository.getByYears(years)
 
     return dividends.reduce<DividendsStats>(
       (stats, dividend) => ({

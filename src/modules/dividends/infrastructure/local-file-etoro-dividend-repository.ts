@@ -8,9 +8,11 @@ import { DividendRepository } from "@modules/dividends/domain/dividend-repositor
 import * as XLSX from "xlsx"
 
 export class LocalFileEtoroDividendRepository implements DividendRepository {
-  async getByYear(year: number): Promise<CompanyDividend[]> {
-    const file = await this.getFile(year)
-    const dividends = this.getDividendsFromEtoro(file)
+  async getByYears(years: number[]): Promise<CompanyDividend[]> {
+    const files = await Promise.all(years.map((year) => this.getFile(year)))
+    const dividends = files
+      .map((file) => this.getDividendsFromEtoro(file))
+      .flat()
     const aggregatedDividends = this.getAggregatedCompanyDividends(dividends)
     aggregatedDividends.sort((a, b) => b.netDividendEUR - a.netDividendEUR)
     return aggregatedDividends
