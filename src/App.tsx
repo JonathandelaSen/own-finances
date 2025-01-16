@@ -6,12 +6,14 @@ import { CompanyDividend } from "@modules/dividends/domain/company-dividend"
 import { LocalFileEtoroDividendRepository } from "@modules/dividends/infrastructure/local-file-etoro-dividend-repository"
 import { DividendsTable } from "@sections/dividends/components/dividends-table/dividends-table"
 import { YearTabs } from "@sections/dividends/components/years-tabs/year-tabs"
-import { InfoPanel } from "@sections/shared/components/info-panel"
+import { InfoPanel } from "@sections/shared/components/info-panel/info-panel"
 import styles from "./dividends.module.css"
 import { DividendsStatsGetter } from "@modules/dividends/application/dividends-stats-getter"
 import { DividendsStats } from "@modules/dividends/domain/dividends-stats"
 import { PositionsGetter } from "@modules/positions/application/positions-getter"
 import { LocalFileEtoroPositionRepository } from "@modules/positions/infrastructure/local-file-etoro-position-repository"
+import { Position } from "@modules/positions/domain/position"
+import { PositionsTable } from "@sections/positions/components/positions-table/positions-table"
 
 const ALL_YEARS_KEY = 9999
 const YEARS = [2023, 2024]
@@ -19,6 +21,7 @@ const YEARS_TABS = [...YEARS, ALL_YEARS_KEY]
 
 function App() {
   const [dividends, setDividends] = useState<CompanyDividend[]>([])
+  const [positions, setPositions] = useState<Position[]>([])
   const [selectedYeaStats, setSelectedYearStats] = useState<DividendsStats>({
     netDividendEUR: 0,
     netDividendUSD: 0,
@@ -81,6 +84,8 @@ function App() {
         />
       </div>
       <DividendsTable dividends={dividends} />
+      <h1>Positions</h1>
+      <PositionsTable positions={positions} />
     </>
   )
 
@@ -107,9 +112,7 @@ function App() {
     const positions = await new PositionsGetter(
       new LocalFileEtoroPositionRepository(YEARS)
     ).run()
-    console.log("----------------POSITIONS---------------------------------")
-    console.log(positions)
-    console.log("----------------POSITIONS  /END -----------------")
+    setPositions(positions)
   }
 }
 

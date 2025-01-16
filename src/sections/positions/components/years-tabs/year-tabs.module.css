@@ -1,0 +1,8 @@
+.container {
+  display: flex;
+  gap: 16px;
+}
+
+button.selected {
+  background-color: #153685;
+}
