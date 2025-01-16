@@ -1,3 +1,19 @@
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.sideBar {
+  background-color: aquamarine;
+  min-width: 200px;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.mainContent {
+  overflow-y: auto;
+}
+
 .allYearsInfoPanelContainer {
   display: flex;
   gap: 12px;

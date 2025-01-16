@@ -80,7 +80,7 @@ export class LocalFileEtoroPositionRepository implements PositionRepository {
         }
       }
     }
-    return Array.from(positions.values())
+    return this.addWeightPercentage(Array.from(positions.values()))
   }
 
   private async getFiles(): Promise<XLSX.WorkBook[]> {
@@ -100,5 +100,16 @@ export class LocalFileEtoroPositionRepository implements PositionRepository {
     })
 
     return Promise.all(filePromises)
+  }
+
+  private addWeightPercentage(positions: Position[]): Position[] {
+    const totalSpent = positions.reduce(
+      (accumulator, current) => accumulator + current.totalPayedUsd,
+      0
+    )
+    return positions.map((position) => {
+      position.weightPercentage = (position.totalPayedUsd / totalSpent) * 100
+      return position
+    })
   }
 }

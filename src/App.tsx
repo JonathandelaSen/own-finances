@@ -46,47 +46,113 @@ function App() {
   }, [])
 
   return (
-    <>
-      <h1>Dividends</h1>
-      <div className={styles.allYearsInfoPanelContainer}>
-        <InfoPanel
-          title="Net dividend"
-          info={`€${allYearStats.netDividendEUR.toFixed(
-            2
-          )} - $${allYearStats.netDividendUSD.toFixed(2)}`}
-        />
-        <InfoPanel
-          title="Withholding Tax"
-          info={`€${allYearStats.withholdingTaxAmountEUR.toFixed(
-            2
-          )} - $${allYearStats.withholdingTaxAmountUSD.toFixed(2)}`}
-        />
+    <div className={styles.container}>
+      <aside className={styles.sideBar}>
+        <div>ASD</div>
+        <div>WERWERWER</div>
+        <div>ASD</div>
+        <div>ASD</div>
+        <div>WERWERWER</div>
+        <div>ASD</div>
+        <div>ASD</div>
+        <div>WERWERWER</div>
+        <div>ASD</div>
+        <div>ASD</div>
+        <div>WERWERWER</div>
+        <div>ASD</div>
+        <div>ASD</div>
+        <div>WERWERWER</div>
+        <div>ASD</div>
+        <div>ASD</div>
+        <div>WERWERWER</div>
+        <div>ASD</div>
+        <div>ASD</div>
+        <div>WERWERWER</div>
+        <div>ASD</div>
+        <div>ASD</div>
+        <div>WERWERWER</div>
+        <div>ASD</div>
+        <div>ASD</div>
+        <div>WERWERWER</div>
+        <div>ASD</div>
+        <div>ASD</div>
+        <div>WERWERWER</div>
+        <div>ASD</div>
+        <div>ASD</div>
+        <div>WERWERWER</div>
+        <div>ASD</div>
+        <div>ASD</div>
+        <div>WERWERWER</div>
+        <div>ASD</div>
+        <div>ASD</div>
+        <div>WERWERWER</div>
+        <div>ASD</div>
+        <div>ASD</div>
+        <div>WERWERWER</div>
+        <div>ASD</div>
+        <div>ASD</div>
+        <div>WERWERWER</div>
+        <div>ASD</div>
+        <div>ASD</div>
+        <div>WERWERWER</div>
+        <div>ASD</div>
+        <div>ASD</div>
+        <div>WERWERWER</div>
+        <div>ASD</div>
+        <div>ASD</div>
+        <div>WERWERWER</div>
+        <div>ASD</div>
+        <div>ASD</div>
+        <div>WERWERWER</div>
+        <div>WERWERWER</div>
+        <div>WERWERWER</div>
+        <div>WERWERWER</div>
+        <div>WERWERWER</div>
+        <div>WERWERWER</div>
+        <div>ASD</div>
+      </aside>
+      <div className={styles.mainContent}>
+        <h1>Dividends</h1>
+        <div className={styles.allYearsInfoPanelContainer}>
+          <InfoPanel
+            title="Net dividend"
+            info={`€${allYearStats.netDividendEUR.toFixed(
+              2
+            )} - $${allYearStats.netDividendUSD.toFixed(2)}`}
+          />
+          <InfoPanel
+            title="Withholding Tax"
+            info={`€${allYearStats.withholdingTaxAmountEUR.toFixed(
+              2
+            )} - $${allYearStats.withholdingTaxAmountUSD.toFixed(2)}`}
+          />
+        </div>
+        <div className={styles.tabsContainer}>
+          <YearTabs
+            years={YEARS_TABS}
+            selectedYear={selectedYear}
+            onClick={(year) => setSelectedYear(year)}
+          />
+        </div>
+        <div className={styles.selectedYearInfoPanelContainer}>
+          <InfoPanel
+            title="Net dividend"
+            info={`€${selectedYeaStats.netDividendEUR.toFixed(
+              2
+            )} - $${selectedYeaStats.netDividendUSD.toFixed(2)}`}
+          />
+          <InfoPanel
+            title="Withholding Tax"
+            info={`€${selectedYeaStats.withholdingTaxAmountEUR.toFixed(
+              2
+            )} - $${selectedYeaStats.withholdingTaxAmountUSD.toFixed(2)}`}
+          />
+        </div>
+        <DividendsTable dividends={dividends} />
+        <h1>Positions</h1>
+        <PositionsTable positions={positions} />
       </div>
-      <div className={styles.tabsContainer}>
-        <YearTabs
-          years={YEARS_TABS}
-          selectedYear={selectedYear}
-          onClick={(year) => setSelectedYear(year)}
-        />
-      </div>
-      <div className={styles.selectedYearInfoPanelContainer}>
-        <InfoPanel
-          title="Net dividend"
-          info={`€${selectedYeaStats.netDividendEUR.toFixed(
-            2
-          )} - $${selectedYeaStats.netDividendUSD.toFixed(2)}`}
-        />
-        <InfoPanel
-          title="Withholding Tax"
-          info={`€${selectedYeaStats.withholdingTaxAmountEUR.toFixed(
-            2
-          )} - $${selectedYeaStats.withholdingTaxAmountUSD.toFixed(2)}`}
-        />
-      </div>
-      <DividendsTable dividends={dividends} />
-      <h1>Positions</h1>
-      <PositionsTable positions={positions} />
-    </>
+    </div>
   )
 
   async function readEToroDividends(year: number) {

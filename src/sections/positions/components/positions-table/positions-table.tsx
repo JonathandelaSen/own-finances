@@ -30,6 +30,11 @@ export const PositionsTable: FC<Props> = (params: Props) => {
         header: "Avg price (USD)",
         cell: ({ getValue }) => `$${getValue<number>().toFixed(2)}`,
       },
+      {
+        accessorKey: "weightPercentage",
+        header: "Weight (spent)",
+        cell: ({ getValue }) => `${getValue<number>().toFixed(2)}%`,
+      },
     ],
     []
   )
