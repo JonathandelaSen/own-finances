@@ -1,0 +1,15 @@
+.allYearsInfoPanelContainer {
+  display: flex;
+  gap: 12px;
+  margin: 48px 0px;
+}
+
+.selectedYearInfoPanelContainer {
+  display: flex;
+  gap: 12px;
+  margin: 24px 0px;
+}
+
+.tabsContainer {
+  margin: 32px 0px;
+}

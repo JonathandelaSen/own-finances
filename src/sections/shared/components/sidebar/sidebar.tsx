@@ -1,16 +1,22 @@
 import { useState } from "react"
 import styles from "./sidebar.module.css"
 import { SidebarItem } from "@sections/shared/components/sidebar/sidebar-item/sidebar-item"
+import {
+  DIVIDENDS_PATH,
+  POSITIONS_PATH,
+} from "@sections/shared/components/router/router"
 
-const MENU_ITEMS = [
-  {
-    text: "Dividends",
-  },
-  {
-    text: "Positions",
-  },
-]
 export const Sidebar = () => {
+  const MENU_ITEMS = [
+    {
+      text: "Dividends",
+      path: DIVIDENDS_PATH,
+    },
+    {
+      text: "Positions",
+      path: POSITIONS_PATH,
+    },
+  ]
   const [selected, setSelected] = useState(MENU_ITEMS[0].text)
 
   return (
@@ -19,6 +25,7 @@ export const Sidebar = () => {
         {MENU_ITEMS.map((item) => (
           <SidebarItem
             text={item.text}
+            path={item.path}
             selected={selected === item.text}
             onClick={() => setSelected(item.text)}
           />
