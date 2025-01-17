@@ -1,13 +1,6 @@
 import { FC } from "react"
-import {
-  getCoreRowModel,
-  flexRender,
-  useReactTable,
-  getSortedRowModel,
-} from "@tanstack/react-table"
 import React from "react"
 import { CompanyDividend } from "@modules/dividends/domain/company-dividend"
-import styles from "./dividends-table.module.css"
 import { Table } from "@sections/shared/components/table/table"
 
 type Props = {
