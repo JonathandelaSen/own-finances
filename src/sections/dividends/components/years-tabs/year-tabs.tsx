@@ -1,5 +1,6 @@
 import { FC } from "react"
 import styles from "./year-tabs.module.css"
+import clsx from "clsx"
 
 type Props = {
   onClick: (year: number) => void
@@ -12,7 +13,10 @@ export const YearTabs: FC<Props> = (params: Props) => {
     <div className={styles.container}>
       {params.years.map((year) => (
         <button
-          className={year === params.selectedYear ? styles.selected : ""}
+          className={clsx(
+            styles.tab,
+            year === params.selectedYear && styles.selected
+          )}
           key={year}
           onClick={() => params.onClick(year)}
         >

@@ -1,5 +1,4 @@
 import "./App.css"
-import { clsx } from "clsx"
 
 import { useEffect, useState } from "react"
 
@@ -16,6 +15,7 @@ import { PositionsGetter } from "@modules/positions/application/positions-getter
 import { LocalFileEtoroPositionRepository } from "@modules/positions/infrastructure/local-file-etoro-position-repository"
 import { Position } from "@modules/positions/domain/position"
 import { PositionsTable } from "@sections/positions/components/positions-table/positions-table"
+import { Sidebar } from "@sections/shared/components/sidebar/sidebar"
 
 const ALL_YEARS_KEY = 9999
 const YEARS = [2023, 2024]
@@ -49,14 +49,7 @@ function App() {
 
   return (
     <div className={styles.container}>
-      <aside className={styles.sideBar}>
-        <div className={styles.sideBarContainer}>
-          <div className={styles.sideBarItem}>ASD</div>
-          <div className={clsx(styles.sideBarItem, styles.sideBarItemSelected)}>
-            ASD
-          </div>
-        </div>
-      </aside>
+      <Sidebar />
       <div className={styles.mainContent}>
         <h1>Dividends</h1>
         <div className={styles.allYearsInfoPanelContainer}>

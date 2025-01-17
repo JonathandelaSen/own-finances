@@ -1,0 +1,16 @@
+.sideBarItem {
+  padding: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 6px 4px;
+  border-radius: 4px;
+}
+
+.sideBarItem:hover {
+  background-color: #153685;
+}
+
+.sideBarItem.selected {
+  font-weight: 800;
+}

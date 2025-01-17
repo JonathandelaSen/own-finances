@@ -3,40 +3,6 @@
   height: 100vh;
 }
 
-.sideBar {
-  min-width: 200px;
-  height: 100vh;
-  overflow-y: auto;
-  display: flex;
-}
-
-.sideBarContainer {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  border-radius: 8px;
-  margin: 18px;
-  padding: 4px;
-  background-color: #2d2d38;
-}
-
-.sideBarItem {
-  padding: 6px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  margin: 6px 4px;
-  border-radius: 4px;
-}
-
-.sideBarItem:hover {
-  background-color: #153685;
-}
-
-.sideBarItemSelected {
-  color: aqua;
-}
-
 .mainContent {
   overflow-y: auto;
 }
