@@ -1,4 +1,6 @@
 import "./App.css"
+import { clsx } from "clsx"
+
 import { useEffect, useState } from "react"
 
 import { DividendsGetter } from "./modules/dividends/application/dividends-getter"
@@ -48,68 +50,12 @@ function App() {
   return (
     <div className={styles.container}>
       <aside className={styles.sideBar}>
-        <div>ASD</div>
-        <div>WERWERWER</div>
-        <div>ASD</div>
-        <div>ASD</div>
-        <div>WERWERWER</div>
-        <div>ASD</div>
-        <div>ASD</div>
-        <div>WERWERWER</div>
-        <div>ASD</div>
-        <div>ASD</div>
-        <div>WERWERWER</div>
-        <div>ASD</div>
-        <div>ASD</div>
-        <div>WERWERWER</div>
-        <div>ASD</div>
-        <div>ASD</div>
-        <div>WERWERWER</div>
-        <div>ASD</div>
-        <div>ASD</div>
-        <div>WERWERWER</div>
-        <div>ASD</div>
-        <div>ASD</div>
-        <div>WERWERWER</div>
-        <div>ASD</div>
-        <div>ASD</div>
-        <div>WERWERWER</div>
-        <div>ASD</div>
-        <div>ASD</div>
-        <div>WERWERWER</div>
-        <div>ASD</div>
-        <div>ASD</div>
-        <div>WERWERWER</div>
-        <div>ASD</div>
-        <div>ASD</div>
-        <div>WERWERWER</div>
-        <div>ASD</div>
-        <div>ASD</div>
-        <div>WERWERWER</div>
-        <div>ASD</div>
-        <div>ASD</div>
-        <div>WERWERWER</div>
-        <div>ASD</div>
-        <div>ASD</div>
-        <div>WERWERWER</div>
-        <div>ASD</div>
-        <div>ASD</div>
-        <div>WERWERWER</div>
-        <div>ASD</div>
-        <div>ASD</div>
-        <div>WERWERWER</div>
-        <div>ASD</div>
-        <div>ASD</div>
-        <div>WERWERWER</div>
-        <div>ASD</div>
-        <div>ASD</div>
-        <div>WERWERWER</div>
-        <div>WERWERWER</div>
-        <div>WERWERWER</div>
-        <div>WERWERWER</div>
-        <div>WERWERWER</div>
-        <div>WERWERWER</div>
-        <div>ASD</div>
+        <div className={styles.sideBarContainer}>
+          <div className={styles.sideBarItem}>ASD</div>
+          <div className={clsx(styles.sideBarItem, styles.sideBarItemSelected)}>
+            ASD
+          </div>
+        </div>
       </aside>
       <div className={styles.mainContent}>
         <h1>Dividends</h1>
