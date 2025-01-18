@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { CompanyDividend } from "@modules/dividends/domain/company-dividend"
 import { LocalFileEtoroDividendRepository } from "@modules/dividends/infrastructure/local-file-etoro-dividend-repository"
 import { DividendsTable } from "@sections/dividends/components/dividends-table/dividends-table"
-import { YearTabs } from "@sections/dividends/components/years-tabs/year-tabs"
+import { YearTabs } from "@sections/shared/components/years-tabs/year-tabs"
 import { InfoPanel } from "@sections/shared/components/info-panel/info-panel"
 import styles from "./dividends-page.module.css"
 import { DividendsStatsGetter } from "@modules/dividends/application/dividends-stats-getter"
@@ -28,7 +28,7 @@ function DividendsPage() {
     withholdingTaxAmountEUR: 0,
     withholdingTaxAmountUSD: 0,
   })
-  const [selectedYear, setSelectedYear] = useState(YEARS[0])
+  const [selectedYear, setSelectedYear] = useState(ALL_YEARS_KEY)
 
   useEffect(() => {
     readEToroDividends(selectedYear)

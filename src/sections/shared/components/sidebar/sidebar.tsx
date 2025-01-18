@@ -4,6 +4,7 @@ import { SidebarItem } from "@sections/shared/components/sidebar/sidebar-item/si
 import {
   DIVIDENDS_PATH,
   POSITIONS_PATH,
+  CAPITAL_SUMMARY_PATH,
 } from "@sections/shared/components/router/router"
 
 export const Sidebar = () => {
@@ -15,6 +16,10 @@ export const Sidebar = () => {
     {
       text: "Positions",
       path: POSITIONS_PATH,
+    },
+    {
+      text: "Capital Summary",
+      path: CAPITAL_SUMMARY_PATH,
     },
   ]
   const [selected, setSelected] = useState(MENU_ITEMS[0].text)
