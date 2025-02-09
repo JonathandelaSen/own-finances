@@ -31,6 +31,7 @@ interface EToroCapitalSummary {
   finalRealizedCapital: { euro: number; dollar: number }
   initialUnrealizedCapital: { euro: number; dollar: number }
   finalUnrealizedCapital: { euro: number; dollar: number }
+  totalRealizedProfit: { euro: number; dollar: number }
 }
 
 interface EToroRawCapitalSummary {
@@ -167,6 +168,24 @@ function fromEToroRawCapitalSummary(
     }
   }
 
+  summary.totalRealizedProfit = {
+    euro:
+      (summary.adjustments?.euro ?? 0) +
+      (summary.profitsOrLossesClosedPositions?.euro ?? 0) +
+      (summary.dividends?.euro ?? 0) +
+      (summary.overnightFees?.euro ?? 0) +
+      (summary.commission?.euro ?? 0) +
+      (summary.sdrtCharge?.euro ?? 0) +
+      (summary.conversionFee?.euro ?? 0),
+    dollar:
+      (summary.adjustments?.dollar ?? 0) +
+      (summary.profitsOrLossesClosedPositions?.dollar ?? 0) +
+      (summary.dividends?.dollar ?? 0) +
+      (summary.overnightFees?.dollar ?? 0) +
+      (summary.commission?.dollar ?? 0) +
+      (summary.sdrtCharge?.dollar ?? 0) +
+      (summary.conversionFee?.dollar ?? 0),
+  }
   return summary as EToroCapitalSummary
 }
 

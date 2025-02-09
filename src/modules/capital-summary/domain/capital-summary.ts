@@ -18,6 +18,7 @@ interface CapitalSummary {
   finalRealizedCapital: { euro: number; dollar: number }
   initialUnrealizedCapital: { euro: number; dollar: number }
   finalUnrealizedCapital: { euro: number; dollar: number }
+  totalRealizedProfit: { euro: number; dollar: number }
 }
 
 export type { CapitalSummary }

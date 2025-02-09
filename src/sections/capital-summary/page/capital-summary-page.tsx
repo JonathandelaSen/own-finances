@@ -7,7 +7,7 @@ import { CapitalSummary } from "@modules/capital-summary/domain/capital-summary"
 import { YearTabs } from "@sections/shared/components/years-tabs/year-tabs"
 
 const ALL_YEARS_KEY = 9999
-const YEARS = [2023, 2024]
+const YEARS = [2023, 2024, 2025]
 const YEARS_TABS = [...YEARS, ALL_YEARS_KEY]
 
 function CapitalSummaryPage() {
@@ -41,6 +41,14 @@ function CapitalSummaryPage() {
             2
           )} - $${allYearCapitalSummary?.dividends.dollar.toFixed(2)}`}
         />
+        <InfoPanel
+          title="Dividends, profits & commissions"
+          info={`€${allYearCapitalSummary?.totalRealizedProfit.euro.toFixed(
+            2
+          )} - $${allYearCapitalSummary?.totalRealizedProfit.dollar.toFixed(
+            2
+          )}`}
+        />
       </div>
       <div className={styles.tabsContainer}>
         <YearTabs
@@ -61,6 +69,14 @@ function CapitalSummaryPage() {
           info={`€${selectedYeaCapitalSummary?.dividends.euro.toFixed(
             2
           )} - $${selectedYeaCapitalSummary?.dividends.dollar.toFixed(2)}`}
+        />
+        <InfoPanel
+          title="Dividends, profits & commissions"
+          info={`€${selectedYeaCapitalSummary?.totalRealizedProfit.euro.toFixed(
+            2
+          )} - $${selectedYeaCapitalSummary?.totalRealizedProfit.dollar.toFixed(
+            2
+          )}`}
         />
       </div>
     </>

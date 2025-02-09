@@ -85,7 +85,7 @@ export class LocalFileEtoroPositionRepository implements PositionRepository {
 
   private async getFiles(): Promise<XLSX.WorkBook[]> {
     const filePromises = this.years.map(async (year) => {
-      const response = await fetch(`/eToro/etoro-${year}.xlsx`)
+      const response = await fetch(`../eToro/etoro-${year}.xlsx`)
       const blob = await response.blob()
       const reader = new FileReader()
 

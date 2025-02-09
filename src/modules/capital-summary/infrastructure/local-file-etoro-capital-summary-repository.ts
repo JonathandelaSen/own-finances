@@ -45,7 +45,7 @@ export class LocalFileEtoroCapitalSummaryRepository
   }
 
   private async getFile(year: number): Promise<XLSX.WorkBook> {
-    const response = await fetch(`eToro/etoro-${year}.xlsx`)
+    const response = await fetch(`../eToro/etoro-${year}.xlsx`)
     const blob = await response.blob()
     const reader = new FileReader()
     return new Promise((resolve) => {

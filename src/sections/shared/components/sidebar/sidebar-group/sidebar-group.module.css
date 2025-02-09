@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.subItemsContainer {
+  display: flex;
+  flex-direction: column;
+  margin-left: 8px;
+}
+
+.item {
+  padding: 6px 8px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 6px 4px;
+  border-radius: 4px;
+}
+
+.item.selected {
+  font-weight: 800;
+  background-color: #21222c;
+}

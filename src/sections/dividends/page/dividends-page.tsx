@@ -11,7 +11,7 @@ import { DividendsStats } from "@modules/dividends/domain/dividends-stats"
 import { DividendsGetter } from "@modules/dividends/application/dividends-getter"
 
 const ALL_YEARS_KEY = 9999
-const YEARS = [2023, 2024]
+const YEARS = [2023, 2024, 2025]
 const YEARS_TABS = [...YEARS, ALL_YEARS_KEY]
 
 function DividendsPage() {
