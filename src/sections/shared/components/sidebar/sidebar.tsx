@@ -8,12 +8,15 @@ import {
   IB_DIVIDENDS_PATH,
 } from "@sections/shared/components/router/router"
 import { SidebarGroup } from "@sections/shared/components/sidebar/sidebar-group/sidebar-group"
+import { EToroIcon } from "@sections/shared/components/icons/e-toro"
+import React from "react"
 
 export const Sidebar = () => {
   const MENU_ITEMS = [
     {
       text: "Etoro",
       subpath: "etoro",
+      icon: <EToroIcon height={22} width={22} strokeWidth={2} />,
       subItems: [
         {
           text: "Dividends",
@@ -49,6 +52,13 @@ export const Sidebar = () => {
           <SidebarGroup
             text={item.text}
             selected={selected.includes(item.subpath)}
+            item={
+              item.icon
+                ? React.cloneElement(item.icon, {
+                    strokeWidth: selected.includes(item.subpath) ? 3 : 2,
+                  })
+                : null
+            }
           >
             {item.subItems.map((subItem) => (
               <SidebarItem

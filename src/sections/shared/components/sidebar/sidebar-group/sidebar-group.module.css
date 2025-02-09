@@ -10,16 +10,24 @@
   margin-left: 8px;
 }
 
-.item {
+.itemContainer {
+  display: flex;
   padding: 6px 8px;
-  font-size: 1.1rem;
-  font-weight: 500;
   cursor: pointer;
   margin: 6px 4px;
   border-radius: 4px;
+  align-items: center;
+  gap: 6px;
 }
 
+.itemContainer.selected {
+  background-color: #21222c;
+}
+
+.item {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
 .item.selected {
   font-weight: 800;
-  background-color: #21222c;
 }
